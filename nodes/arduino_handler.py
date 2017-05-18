@@ -1,5 +1,6 @@
+#!/usr/bin/python
 """
-
+Handles Arduino messages and publishes them to ROS topics
 """
 import rospy
 from std_msgs.msg import Float64
