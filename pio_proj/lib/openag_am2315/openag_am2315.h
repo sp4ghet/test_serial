@@ -49,8 +49,6 @@ class Am2315 : public Module {
     // Private variables
     float _air_temperature;
     float _air_humidity;
-    bool _send_air_temperature;
-    bool _send_air_humidity;
     uint32_t _time_of_last_reading;
     const static uint32_t _min_update_interval = 2000;
     const static int _i2c_address = 0x5c;

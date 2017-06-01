@@ -26,17 +26,14 @@ uint8_t Am2315::begin() {
   status_level = OK;
   status_code = CODE_OK;
   status_msg = "";
-  _send_air_temperature = false;
-  _send_air_humidity = false;
   _time_of_last_reading = 0;
   readData();
   return status_level;
 }
 
 uint8_t Am2315::update() {
-  bool success = true;
   if (millis() - _time_of_last_reading > _min_update_interval) {
-      success = readData();
+      readData();
       _time_of_last_reading = millis();
   }
   return status_level;
@@ -52,9 +49,6 @@ float Am2315::get_air_humidity() {
 
 bool Am2315::readData() {
   uint8_t reply[8];
-
-  _send_air_temperature = false;
-  _send_air_humidity = false;
 
   // Wake up sensor
   Wire.beginTransmission(_i2c_address);
@@ -109,8 +103,6 @@ bool Am2315::readData() {
   }
 
   if (status_level == OK) {
-    _send_air_temperature = true;
-    _send_air_humidity = true;
     return true;
   }
   return false;
